@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CodeNova Solution</title>
+  <meta name="description" content="CodeNova Solution — Modern websites, software and GPS solutions in Moshono, Arusha." />
+  <style>
+    :root{
+      --bg:#0d0d0d;
+      --card:#0f1724;
+      --muted:#9ca3af;
+      --accent:#38bdf8;
+      --glass: rgba(255,255,255,0.04);
+      --radius:16px;
+      --maxw:1200px;
+    }
+    [data-theme='light']{ --bg:#f8fafc; --card:#ffffff; --muted:#475569; --accent:#0ea5e9; --glass: rgba(0,0,0,0.04); }
+
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:var(--bg);color: #fff;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
+    a{color:var(--accent);text-decoration:none}
+
+    /* Container */
+    .container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+
+    /* NAVBAR */
+    nav{backdrop-filter:blur(6px);background:linear-gradient(180deg, rgba(13,13,13,0.6), rgba(13,13,13,0.35));position:sticky;top:0;z-index:50}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{display:flex;gap:8px;align-items:center}
+    .logo svg{width:44px;height:44px}
+    .brand h1{font-size:18px;margin:0;color:var(--accent)}
+    .nav-links{display:flex;gap:18px;align-items:center}
+    .nav-links a{color:var(--muted);font-weight:600}
+    .cta{padding:8px 14px;border-radius:10px;background:var(--accent);color:#000;font-weight:700;border:none;cursor:pointer}
+
+    /* Mobile hamburger */
+    .hamburger{display:none;cursor:pointer;padding:8px;border-radius:8px;background:transparent;border:1px solid transparent}
+
+    /* Hero */
+    .hero{min-height:70vh;display:grid;grid-template-columns:1fr 420px;align-items:center;gap:30px;padding:60px 0}
+    .hero-left h2{font-size:44px;margin:0 0 12px;color:var(--accent);line-height:1.02}
+    .hero-left p{color:var(--muted);font-size:18px;margin:0 0 18px}
+    .hero-actions{display:flex;gap:12px}
+    .playcard{display:flex;flex-direction:column;gap:12px;padding:18px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:14px}
+    .playcard img{width:100%;height:220px;border-radius:10px;object-fit:cover}
+
+    /* Services grid */
+    .service-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:18px}
+    .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.35);transform:translateY(0);transition:transform .35s,box-shadow .35s}
+    .card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(0,0,0,0.45)}
+    .card h3{margin:0 0 8px}
+    .card p{margin:0;color:var(--muted)}
+
+    /* Projects & media */
+    .projects{display:flex;flex-direction:column;gap:14px}
+    .project-list{display:flex;gap:12px;flex-wrap:wrap}
+    .project{flex:1 1 220px;padding:14px;background:var(--glass);border-radius:12px}
+
+    /* Media box */
+    .media-box{display:flex;gap:12px;flex-wrap:wrap}
+    .media-box iframe,.media-box img{flex:1 1 320px;height:200px;border-radius:10px;border:0}
+
+    /* Map */
+    .map-wrapper{height:350px;border-radius:12px;overflow:hidden}
+
+    /* Footer */
+    footer{margin-top:40px;padding:40px 0;background:linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3))}
+    .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:24px;align-items:start}
+    .footer-grid h4{margin:0 0 8px;color:var(--accent)}
+    .socials{display:flex;gap:10px}
+    .socials a{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:8px;background:var(--card)}
+    .footer-bottom{text-align:center;margin-top:20px;color:var(--muted);font-size:13px}
+
+    /* small screens */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;}
+      .service-grid{grid-template-columns:repeat(2,1fr)}
+      .nav-links{display:none}
+      .hamburger{display:inline-flex}
+    }
+    @media (max-width:640px){
+      .service-grid{grid-template-columns:1fr}
+      .footer-grid{grid-template-columns:1fr}
+      .hero-left h2{font-size:28px}
+    }
+
+    /* animations */
+    .fade-up{opacity:0;transform:translateY(12px);animation:fadeUp .7s forwards}
+    @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+
+  </style>
+</head>
+<body data-theme="dark">
+  <nav>
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <!-- Simple SVG logo: star + orbit -->
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CodeNova logo">
+            <circle cx="32" cy="32" r="30" fill="url(#g)" />
+            <defs>
+              <linearGradient id="g" x1="0" x2="1">
+                <stop offset="0" stop-color="#7dd3fc" />
+                <stop offset="1" stop-color="#0ea5e9" />
+              </linearGradient>
+            </defs>
+            <path d="M32 18 L36 30 L48 30 L38 36 L42 48 L32 40 L22 48 L26 36 L16 30 L28 30 Z" fill="#001219" opacity="0.9"/>
+          </svg>
+        </div>
+        <div>
+          <h1>CodeNova Solution</h1>
+          <div style="font-size:12px;color:var(--muted)">Web • Software • GPS</div>
+        </div>
+      </div>
+
+      <div class="nav-links" role="navigation" aria-label="Main navigation">
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#projects">Projects</a>
+        <a href="#media">Media</a>
+        <a href="#location">Location</a>
+        <a href="#contact">Contact</a>
+        <button class="cta" id="themeToggle" aria-pressed="false">Light</button>
+      </div>
+
+      <button class="hamburger" id="mobileBtn" aria-label="Open menu">☰</button>
+    </div>
+
+    <!-- Mobile menu (hidden on desktop) -->
+    <div id="mobileMenu" style="display:none;padding:10px 20px;background:var(--card)">
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#projects">Projects</a>
+        <a href="#media">Media</a>
+        <a href="#location">Location</a>
+        <a href="#contact">Contact</a>
+        <button class="cta" id="mobileTheme">Toggle Theme</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <!-- Hero -->
+    <section class="hero" id="home">
+      <div class="hero-left fade-up" style="animation-delay:.1s">
+        <h2>Design. Build. Track.
+          <br /><span style="font-weight:700">Next‑gen websites & GPS solutions</span>
+        </h2>
+        <p>We craft fast, secure, and beautiful digital experiences for businesses in Arusha and beyond. From full-stack websites to fleet GPS tracking and software management — CodeNova covers it.</p>
+        <div class="hero-actions">
+          <a class="cta" href="#contact">Request Quote</a>
+          <a style="padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:var(--muted);display:inline-flex;align-items:center;gap:8px" href="#projects">See Projects →</a>
+        </div>
+
+        <div style="margin-top:18px;color:var(--muted);font-size:13px">Located: <strong style="color:var(--accent)">Moshono, Arusha</strong></div>
+      </div>
+
+      <aside class="playcard fade-up" style="animation-delay:.15s">
+        <div style="display:flex;gap:10px;align-items:center">
+          <div style="flex:1">
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="project preview" />
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div style="font-weight:700">Realtime GPS Demo</div>
+            <div style="font-size:13px;color:var(--muted)">Live tracking & dashboard preview</div>
+          </div>
+          <div><button style="padding:8px 12px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.06);">Live</button></div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- Services -->
+    <section class="section" id="services">
+      <h3 style="color:var(--accent);margin-bottom:8px">Services</h3>
+      <div class="service-grid">
+        <div class="card fade-up">
+          <h3>Website Development</h3>
+          <p>Progressive web apps, e-commerce, landing pages, and SEO-ready sites.</p>
+        </div>
+        <div class="card fade-up">
+          <h3>Software & Management</h3>
+          <p>From inventory systems to school management — reliable & maintainable.</p>
+        </div>
+        <div class="card fade-up">
+          <h3>GPS Tracking</h3>
+          <p>Fleet monitoring, geo-fencing, historical routes, and alerts.</p>
+        </div>
+        <div class="card fade-up">
+          <h3>IT Consultancy</h3>
+          <p>Cloud hosting, backups, cybersecurity basics and operational support.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="section" id="projects">
+      <h3 style="color:var(--accent);margin-bottom:8px">Recent Projects</h3>
+      <div class="projects">
+        <div class="project-list">
+          <div class="project">School Management System — Custom portal for attendance & grades.</div>
+          <div class="project">POS & Inventory — Real-time stock & sales reporting.</div>
+          <div class="project">Fleet GPS Dashboard — Live vehicle tracking and alerts.</div>
+          <div class="project">Corporate Website — Brand & brochure site for a local firm.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Media -->
+    <section class="section" id="media">
+      <h3 style="color:var(--accent);margin-bottom:8px">Gallery & Media</h3>
+      <div class="media-box">
+        <img src="" alt="Placeholder — add your image" />
+        <!-- Example YouTube embed — replace src with your video ID -->
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="YouTube video" allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <!-- Location -->
+    <section class="section" id="location">
+      <h3 style="color:var(--accent);margin-bottom:8px">Find Us</h3>
+      <p style="color:var(--muted)">We have an office in <strong>Moshono, Arusha</strong>. Drop by or schedule an appointment.</p>
+      <div class="map-wrapper" style="margin-top:12px;">
+        <!-- Embedded Google Map focused on Moshono, Arusha -->
+        <iframe width="100%" height="100%" frameborder="0" style="border:0" src="https://maps.google.com/maps?q=Moshono%20Arusha&t=&z=14&ie=UTF8&iwloc=&output=embed" allowfullscreen aria-label="Map showing Moshono, Arusha"></iframe>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section" id="contact">
+      <h3 style="color:var(--accent);margin-bottom:8px">Contact Us</h3>
+      <p style="color:var(--muted)">Email: <a href="mailto:info@codenova.tech">info@codenova.tech</a> • Phone: <a href="tel:+255652105072">+255 652 105 072</a></p>
+
+      <!-- Simple contact form (non-functional placeholder) -->
+      <form style="display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:900px;margin-top:12px">
+        <input placeholder="Your name" style="padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:inherit" />
+        <input placeholder="Email or phone" style="padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:inherit" />
+        <input style="grid-column:1 / -1;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:inherit" placeholder="Subject" />
+        <textarea placeholder="Message" style="grid-column:1 / -1;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:inherit;min-height:120px"></textarea>
+        <button style="grid-column:1 / -1;padding:12px;border-radius:10px;background:var(--accent);color:#000;border:none;font-weight:700">Send Message</button>
+      </form>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <h4>CodeNova Solution</h4>
+        <p style="color:var(--muted)">We build modern digital tools for businesses in Arusha and across East Africa. Reliable, maintainable, future-ready.</p>
+        <div style="margin-top:12px;display:flex;gap:8px">
+          <a href="#" aria-label="Call" style="padding:8px 12px;border-radius:10px;background:var(--card);">Call</a>
+          <a href="#" aria-label="Email" style="padding:8px 12px;border-radius:10px;background:var(--card);">Email</a>
+        </div>
+      </div>
+
+      <div>
+        <h4>Quick Links</h4>
+        <ul style="list-style:none;padding:0;margin:0;color:var(--muted)">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#media">Gallery</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Contact</h4>
+        <p style="color:var(--muted);margin:0">info@codenova.tech</p>
+        <p style="color:var(--muted);margin:0">+255 652 105 072</p>
+        <p style="color:var(--muted);margin:0">Moshono, Arusha</p>
+      </div>
+
+      <div>
+        <h4>Follow & Subscribe</h4>
+        <div class="socials" style="margin-top:8px">
+          <a href="#" aria-label="YouTube">YT</a>
+          <a href="#" aria-label="Twitter">TW</a>
+          <a href="#" aria-label="Facebook">FB</a>
+        </div>
+        <div style="margin-top:12px">
+          <input placeholder="Your email" style="padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:inherit;width:100%" />
+          <button style="margin-top:8px;padding:8px 12px;border-radius:10px;background:var(--accent);color:#000;border:none;width:100%">Subscribe</button>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2025 CodeNova Solution — Built with care in Arusha • <a href="#">Privacy</a> • <a href="#">Terms</a></div>
+  </footer>
+
+  <script>
+    // Mobile menu
+    const mobileBtn = document.getElementById('mobileBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileBtn.addEventListener('click', ()=>{
+      mobileMenu.style.display = mobileMenu.style.display === 'none' ? 'block' : 'none';
+    });
+
+    // Theme toggle (persist)
+    const themeToggle = document.getElementById('themeToggle');
+    const mobileTheme = document.getElementById('mobileTheme');
+    const root = document.documentElement;
+    const body = document.body;
+    function applyTheme(t){
+      body.setAttribute('data-theme', t);
+      themeToggle.textContent = t === 'light' ? 'Dark' : 'Light';
+      themeToggle.setAttribute('aria-pressed', t === 'light');
+    }
+    // load
+    const saved = localStorage.getItem('cn-theme') || 'dark';
+    applyTheme(saved);
+    themeToggle.addEventListener('click', ()=>{
+      const next = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('cn-theme', next); applyTheme(next);
+    });
+    mobileTheme.addEventListener('click', ()=>{ const next = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'; localStorage.setItem('cn-theme', next); applyTheme(next); });
+
+    // simple scroll reveal for .fade-up
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); e.target.style.animationName = 'fadeUp'; e.target.style.animationFillMode='forwards'; }});
+    },{threshold:0.12});
+    document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
+
+  </script>
+</body>
+</html>
